@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<title>가상 클래스</title>
+	<style>
+		#container {
+			text-align: center;
+			color: #2b2b2b;
+		}
+		table,
+		tb,
+		th {
+			border: 1px solid #ccc;
+		}
+		table {
+			width: 200px;
+			margin: 0 auto;
+			border-collapse: collapse;
+		}
+		td {
+			text-align: left;
+			padding: 10px;
+			padding-left: 20px;
+		}
+		table tr:nth-child(2n+1) { /*n이란 숫자는 0부터 시작. 홀수인 경우에 (2n+1) 중간에 다른것이 끼이면 카운트가 달라진다.*/
+		/* table tr:nth-of-type(2n+1) { tr태그이외의 순번을 카운트하지 않겠습니다.*/
+		/* table tr:nth-last-type() 뒤에서부터 카운트 */
+			background: lightgray;
+			color: black;
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="container">
+		<h1>건강에 좋은 건강 식품</h1>
+		<table>
+			<tr>
+				<td>블루베리</td>
+			</tr>
+			<p>녹차</p>
+			<tr>
+				<td>귀리</td>
+			</tr>
+			<tr>
+				<td>토마토</td>
+			</tr>
+			<tr>
+				<td>시금치</td>
+			</tr>
+			<tr>
+				<td>적포도주</td>
+			</tr>
+			<tr>
+				<td>견과류</td>
+			</tr>
+			<tr>
+				<td>브로콜리</td>
+			</tr>
+			<tr>
+				<td>연어</td>
+			</tr>
+			<tr>
+				<td>마늘</td>
+			</tr>
+			<tr>
+				<td>녹차</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

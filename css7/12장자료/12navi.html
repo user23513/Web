@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <title>link 스타일</title>
+  <style>
+    .container {
+      width: 960px;
+      margin: 0 auto;
+    }
+    .navi {
+      width: 960px;
+      height: 60px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #ccc;
+    }
+    .navi ul {
+      list-style: none;
+      padding-top: 10px;
+      padding-bottom: 5px;
+    }
+    .navi ul li {
+      display: inline-block;
+      width: 150px;
+      padding: 10px;
+    }
+    .navi a:link,
+    .navi a:visited {
+      font-size: 14px;
+      padding: 10px;
+      text-decoration: none;
+    }
+    .navi a:link {
+      color: aquamarine;
+    }
+    .navi a:visited {
+      color: green;
+    }
+    .navi a:hover,
+    .navi a:focus {
+      background-color: #222;
+      color: #fff;
+    }
+    .navi a:active {
+      background-color: #f00;
+    }
+    input {
+      background-color: aqua;
+    }
+    input:focus {
+      background-color:cadetblue ;
+    }
+    input[name="passwd"] {
+      background-color: pink;
+    }
+    input:focus[name="passwd"] {
+      background-color: rebeccapurple;
+    }
+   
+
+  </style>
+  <!--[if lt IE 9]>
+<script src="html5shiv.js"></scirpt>
+<![endif]-->
+</head>
+<body>
+  <div class="container">
+    <nav class="navi">
+      <ul>
+        <li><a href="#">이용 안내</a></li>
+        <li><a href="#">객실 소개</a></li>
+        <li><a href="#">예약 방법 및 요금</a></li>
+        <li><a href="#">예약하기</a></li>
+      </ul>
+    </nav>
+  </div>
+  사용자ID: <input type="text" name="user" id=""><br>
+  비밀번호: <input type="text" name="passwd" id="">
+</body>
+</html>
