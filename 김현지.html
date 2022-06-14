@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김현지페이지</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        #container {
+            width: 90%;
+            /* height: 1000px; */
+            margin: 5px auto 0;
+        }
+        header nav {
+            border-top: 1px dotted gainsboro;
+            border-bottom: 1px dotted gainsboro;
+            width: 100%;
+            height: 45px;
+        }
+        header ul {
+            position: relative;
+            left: 40px;
+            list-style-type: none;
+        }
+        header li {
+            display: inline-block;
+            width: 10%;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            font-weight: bold;
+            overflow: hidden;
+        }
+        header li:hover {
+            color: rgb(147, 153, 158);
+            border-bottom: 2px solid black;
+        }
+        header a {
+            color: black;
+            text-decoration: none;
+        }
+        aside {
+            position: relative;
+            top: 90px;
+            width: 15%;
+            height: 460px;
+            border-bottom: 1px dotted rgba(128, 128, 128, 0.575);
+            float: left;
+        }
+        aside nav {
+            position: relative;
+            top: 20px;
+        }
+        aside ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        aside li {
+            text-align: left;
+            height: 50px;
+            line-height: 45px;
+            overflow: hidden;
+            border-top: 1px dotted rgba(128, 128, 128, 0.575);
+        }
+        aside a:hover {
+            color: white;
+            background-color: rgb(159, 160, 160);
+        }
+        aside a {
+            display: inline-block;
+            text-decoration: none;
+            color: black;
+            width: 100%;
+            height: 460px;
+            padding: 5px;
+        }
+        section {
+            position: relative;
+            top: 80px;
+            left: 60px;
+            width: 80%;
+            /* border:  2px solid salmon; */
+            float: left;
+        }
+        section > h2 {
+            position: relative;
+            padding-bottom: 20px;
+            border-bottom: 1px solid black;
+        }
+        section > div {
+            width: 100%;
+            height: 100px;
+            border-bottom: 1px solid black;
+        }
+        section p {
+            position: relative;
+            top: 60px;
+            font-weight: bold;
+            float: left;
+        }
+        section select {
+            width: 150px;
+            height: 30px;
+            background-color: rgb(198, 203, 207);
+        }
+        #search {
+            position: relative;
+            top: 60px;
+            float: right;
+        }
+        #search input:nth-child(2) {
+            position: relative;
+            top: 0.5px;
+            left: -6px;
+            height: 30px;
+        }
+        #search input:nth-child(3) {
+            position: relative;
+            top: 1px;
+            left: -12px;
+            height: 30px;
+        }
+        table {
+            width: 100%;
+        }
+        table tr {
+            height: 50px;
+        }
+        table th,td {
+            border-bottom: 1px dotted gainsboro;
+            text-align: center;
+        }
+        tr td:nth-child(2) {
+            text-align: left;
+            width: 40%;
+        }
+        footer {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            height: 40px;
+            margin-top: 20px;
+            font-size: smaller;
+            font-weight: bold;
+        } 
+        footer a {
+            display: inline-block;
+            position: relative;
+            left: 30%;
+            line-height: 30px;
+            text-decoration: none;
+            color: black;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        footer span a:focus {
+            background-color: rgb(179, 185, 190);
+            color: white;
+        }
+        .circle {
+            border: 1px solid gainsboro;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#">감염병</a></li>
+                    <li><a href="#">건강정보</a></li>
+                    <li><a href="#">정책정보</a></li>
+                    <li><a href="#">연구개발</a></li>
+                    <li><a href="#">알림·자료</a></li>
+                    <li><a href="#">간행물·통계</a></li>
+                    <li><a href="#">민원·정보공개</a></li>
+                    <li><a href="#">기관소개</a></li>
+                    <li><a href="#">사업별 누리집</a></li>
+                </ul>
+            </nav>
+        </header>
+        <aside>
+            <h3>알림·자료</h3>
+            <nav>
+                <ul>
+                    <li><a href="#">이달의건강소식</a></li>
+                    <li><a href="#">보도자료</a></li>
+                    <li><a href="#">포토뉴스</a></li>
+                    <li><a href="#">홍보자료</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">공고/공시</a></li>
+                    <li><a href="#">채용공고</a></li>
+                    <li><a href="#">법령·지침·서식</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <section>
+            <h2>공고/공시</h2>
+            <div>
+                <p>전체 3,320건,현재 페이지 2/332</p>
+                <div id="search">
+                <select id="">
+                    <option value="제목">제목</option>
+                    <option value="작성자">작성자</option>
+                </select>
+                <input type="search" value="     검색어를 입력하세요">
+                <input type="submit" value="검색">
+                </div>
+            </div>
+            <article>
+                <table>
+                    <tr>
+                        <th style="width: 100px;">번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일자</th>
+                        <th>조회수</th>
+                    </tr>
+                    <tr>
+                        <td>3310</td>
+                        <td>[건강정보 개발 및 국가건강정보포털 운영] 2022년 민간위</td>
+                        <td>만성질환예방과</td>
+                        <td>2021-12-28</td>
+                        <td>137</td>
+                    </tr>
+                    <tr>
+                        <td>3309</td>
+                        <td>국제공인예방접종지정기관 지정 공고</td>
+                        <td>질병관리청 검역정책과</td>
+                        <td>2021-12-23</td>
+                        <td>305</td>
+                    </tr>
+                    <tr>
+                        <td>3308</td>
+                        <td>2022년 환전외국환은행 선정결과 공고</td>
+                        <td>백신계약팀</td>
+                        <td>2021-12-23</td>
+                        <td>184</td>
+                    </tr>
+                    <tr>
+                        <td>3307</td>
+                        <td>2021년 질병관리청 정책연구용역(강원도 홍천군과 횡성군)</td>
+                        <td>운영지원과</td>
+                        <td>2021-12-20</td>
+                        <td>378</td>
+                    </tr>
+                    <tr>
+                        <td>3306</td>
+                        <td>2021 질병관리청 정책연구용역(국민건강영양조사 원시자)</td>
+                        <td>운영지원과</td>
+                        <td>2021-12-17</td>
+                        <td>432</td>
+                    </tr>
+                    <tr>
+                        <td>3305</td>
+                        <td>2021년 질병관리청 건강영양조사분석과 정책연구용역(3건)</td>
+                        <td>운영지원과</td>
+                        <td>2021-12-14</td>
+                        <td>770</td>
+                    </tr>
+                    <tr>
+                        <td>3304</td>
+                        <td>[제1차 기후보건영향평가] 공청회 개최 공고</td>
+                        <td>미래질병대비과</td>
+                        <td>2021-12-08</td>
+                        <td>438</td>
+                    </tr>
+                    <tr>
+                        <td>3303</td>
+                        <td>2021년 질병관리청 정책연구용역(인권 관점의 방역체계 구)</td>
+                        <td>운영지원과</td>
+                        <td>2021-12-07</td>
+                        <td>633</td>
+                    </tr>
+                    <tr>
+                        <td>3302</td>
+                        <td>2021년 질병관리청 만성질환 관리과 정책연구용영(4건)입</td>
+                        <td>운영지원과</td>
+                        <td>2021-12-07</td>
+                        <td>583</td>
+                    </tr>
+                    <tr>
+                        <td>3301</td>
+                        <td>2021년 질병관리청 정책연구용역(404호,405호)입찰 공고</td>
+                        <td>운영지원과</td>
+                        <td>2021-12-06</td>
+                        <td>500</td>
+                    </tr>
+                </table>
+            </article>
+            <footer>
+                <a class="circle" href="#"><<</a>
+                <a class="circle" href="#"><</a>
+                <span><a href="#">1</a></span>
+                <span><a href="#">2</a></span>
+                <span><a href="#">3</a></span>
+                <span><a href="#">4</a></span>
+                <span><a href="#">5</a></span>
+                <span><a href="#">6</a></span>
+                <span><a href="#">7</a></span>
+                <span><a href="#">8</a></span>
+                <span><a href="#">9</a></span>
+                <span><a href="#">10</a></span>
+                <a class="circle" href="#">></a>
+                <a class="circle" href="#">>></a>
+            </footer>
+        </section>
+    </div>
+</body>
+</html>
