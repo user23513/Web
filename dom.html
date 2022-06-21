@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom.html</title>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="show">
+
+    </div>
+    <script>
+        let students = [{
+            sno: 1,
+            sname: '이희수'
+        }, {
+            sno: 2,
+            sname: '권소정'
+        }, {
+            sno: 3,
+            sname: '김하은'
+        }];
+
+        // Document Object Model => object: 속성, 기능
+        let show = document.getElementById('show');
+
+
+        // console.log(ul);
+        // console.log(show);
+        show.appendChild(makeTable()); // 부모요소.appendChild(자식요소)
+
+        function makeTable() {
+            let table = document.createElement('table');
+            let tr;
+            let td;
+            students.forEach(obj => {
+                console.log(obj);
+                tr = document.createElement('tr');
+                for (let key in obj) {
+                    td = document.createElement('td');
+                    let text = document.createTextNode(obj[key]);
+                    console.log('text : ',text)
+                    td.appendChild(text);
+                    console.log('td: ', td);
+                    tr.appendChild(td);
+                }
+                console.log('tr: ',tr);
+                table.appendChild(tr);
+            })
+            console.log(table);
+            return table;
+        }
+
+        function makeUL() {
+            //요소 생성. createElement()
+            let ul = document.createElement('ul');
+            students.forEach(elem => {
+                let li = document.createElement('li');
+                li.setAttribute('id', elem.sno); // attributeNode 추가
+                let text = document.createTextNode(`${elem.sno}, ${elem.sname}`);
+                li.appendChild(text);
+                console.log(li)
+                ul.appendChild(li);
+            });
+            return ul;
+        }
+    </script>
+</body>
+
+</html>
