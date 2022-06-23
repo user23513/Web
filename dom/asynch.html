@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>asynch.html</title>
+    <script>
+        // 동기(먼저요청한거 처리->다음거 처리) vs 비동기(처리된 결과를 기다리지 않고 다음으로 넘어가는)
+        // 비동기처리(Ajax) : Asynchronous Javascript And XML(요즘은 xml보다 json을 많이 씀)
+        // 비동기 방식
+        setTimeout(function () {
+            console.log('start');
+
+            setTimeout(function () {
+                console.log('mid');
+            }, 1000); // 1초있다가 함수를 실행하세요.
+
+            setTimeout(() => {
+                console.log('end');
+            }, 1500);
+        }, 2000);
+
+        // 이미 만들어진 html가지고 오면 데이터양이 많으니 json같은걸로 필요한 데이터만 가져와서 활용
+        let xhtp = new XMLHttpRequest(); // Ajax : 파일정보 읽어올수있음
+        xhtp.open('get', '../js/dataset.xml'); // 요청방식, 요청URL을 매개값으로
+        xhtp.send(); // 이메소드가 호출되어야 데이터를 읽어옴
+        xhtp.onload = loadCallBack;
+
+        let ajax = new XMLHttpRequest();
+        ajax.open('get', '...??');
+        ajax.onload = loadCallBack;
+
+        function loadCallBack () {
+            // console.log(xhtp.responseText); // data.text 값을 responseText 에다가 담음
+            // document.write(xhtp.responseText);
+            // let data = JSON.parse(xhtp.responseText);
+            // console.log(data);
+            console.log(this.responseXML); // 다른거를 불러올때도 사용가능하게 this로 해야한다.
+            let doc = this.responseXML;
+            let records = doc.getElementsByTagName('record'); // HTMLCollecrtion -> forEach 사용못함 -> forOf사용
+            records = doc.querySelectorAll('record'); // NodeList -> forEach 사용가능
+            console.log(records[0].children[1].textContent);
+
+            records.forEach(member => {
+                // console.log(member);
+                // member.children[0].textContent; // id 값
+                // member.children[1].textContent; // f_name 값
+                let str = '';
+                let show = document.getElementById('show');
+
+                for (let i = 0; i < member.children.length; i++) {
+                    str += member.children[i].textContent + " ";
+                }
+                console.log(str);
+                let li = document.createElement('li');
+                let text = document.createTextNode(str);
+                li.appendChild(text);
+                show.appendChild(li);
+            });
+
+        }; //on~ 이벤트와 관련된 속성
+    </script>
+</head>
+
+<body>
+    <ul id="show">
+        <!-- <li>id, fn, ln, em, sal</li> -->
+
+    </ul>
+
+</body>
+
+</html>
