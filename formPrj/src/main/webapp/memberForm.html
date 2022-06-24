@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>memberForm</title>
+</head>
+<body>
+	<form name="servForm" action="member" method="get">
+		<input type="hidden" name="cmd" value="insert"> 
+		회원이름: <input type="text" name="name"><br> 
+		주소: <input type="text"name="addr"><br>
+		<input type="submit" value="전송">
+	</form>
+
+	<script>
+		let xhtp = new XMLHttpRequest();
+		xhtp.open('get', 'member?cmd=insert&name=일요일&addr=부산광역시');
+		xhtp.send();
+		xhtp.onload = function() {
+			console.log(xhtp.responseText);
+		
+		}
+	</script>
+</body>
+</html>

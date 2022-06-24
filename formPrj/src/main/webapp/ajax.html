@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border=1>
+		<thead>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Email</th>
+		</thead>
+		<tbody id="empList"></tbody>
+	</table>
+	<script>
+		let fields = {
+				empId: "사원번호",
+				lastName: "이름",
+				email : "이메일"
+		}
+	
+		let xhtp = new XMLHttpRequest();
+		xhtp.open('get', 'EmpServlet');
+		xhtp.send();
+		xhtp.onload = function() {
+			let data = JSON.parse(this.responseText);
+			console.log(data);
+			
+			
+			let thList = document.querySelectorAll('th');
+			let textList = [];
+			thList.forEach(th => {
+				textList.push(th.textContent);
+			});
+			
+			data.forEach(emp => {
+				let tr = document.createElement('tr');
+				for(let field in fields) {
+					let td =  document.createElement('td');
+					td.textContent = emp[field];
+					tr.append(td);
+				
+				}
+				let table = document.getElementById('empList');
+				table.append(tr);
+			});
+			
+			/* data.forEach(emp => {
+				let tr = document.createElement('tr');
+				for(let elem in emp) {
+					let td =  document.createElement('td');
+					textList.forEach(val => {
+						if(val == elem){
+							td.textContent = emp[elem];
+							tr.append(td);
+						}
+					});
+				}
+				let table = document.getElementById('empList');
+				table.append(tr);
+			}); */
+		}
+	</script>
+</body>
+</html>
