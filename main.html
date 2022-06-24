@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>main.html</title>
+    <script>
+
+    </script>
+    <!-- <script src="js/variable.js"></script> -->
+    <!-- <script src="js/variable2.js"></script> -->
+    <!-- <script src="js/variable3.js"></script> -->
+    <!-- <script src="js/function.js"></script> -->
+    <!-- <script src="js/function1.js"></script> -->
+    <!-- <script src="js/function2.js"></script> -->
+    <!-- <script src="js/function3.js"></script> -->
+    <!-- <script src="js/object.js"></script> -->
+    <!-- <script src="js/object_table.js"></script> -->
+    <!-- <script src="js/function_table.js"></script> -->
+    <!-- <script src="js/object_constructor.js"></script> -->
+    <!-- <script src="js/string_basic.js"></script> -->
+    <!-- <script src="js/string_literal.js"></script> -->
+    <!-- <script src="js/array_basic.js"></script> -->
+    <!-- <script src="js/array_basic1.js"></script> -->
+    <!-- <script src="js/array_basic2.js"></script> -->
+    <!-- <script src="js/array_basic3.js"></script> -->
+    <!-- <script src="js/for_loop.js"></script> -->
+    <!-- <script src="js/for_loop2.js"></script> -->
+    <!-- <script src="js/array_method.js"></script> -->
+
+
+    <!-- <button id="add">클릭</button>
+    <script>
+       let btn = document.getElementById('add');
+       console.log(btn);
+       btn.addEventListener('click',function(){
+            console.log(this); // window(X), object(X), eventTarget(O)
+       })
+    </script> -->
+
+
+
+
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li>Apple</li>
+            <li>Banana</li>
+            <li>Cherry</li>
+        </ul>
+    </div>
+
+    <button id="add1">클릭</button>
+    <button>클릭</button>
+    <script>
+        console.log(window);
+        let lis = document.getElementsByTagName('li'); // HTMLCollection
+        console.log(lis);
+        // lis[0].remove();
+
+        let add1 = document.getElementById('add1');
+        add1.addEventListener('click', function () {
+            // element node 생성
+            let li = document.createElement('li'); // element node 생성
+            li.innerHTML = '대구';
+            let ul = document.querySelector('div > ul');
+            ul.appendChild(li); //<ul><li>대구</li></ul>
+
+            console.log(li);
+        });
+        // console.log(add1);
+
+        // let add2 = document.getElementById('add2');
+        let btns = document.querySelectorAll('button'); // Nodelist
+        // let btns2 = document.getElementsByTagName('button');
+        // console.log(btns2);
+        console.log(btns);
+        console.log(btns[1]);
+        btns[1].addEventListener('mouseout', function () {
+            document.querySelector('div>ul>li').remove();
+        });
+    </script>
+
+    <!-- <input type="file" id="selectFile" name="selectFile" accept="text/plain"> -->
+    <!-- <script src="js/exception.js"></script> -->
+    <!-- <script src="js/calendar_date.js"></script> -->
+</body>
+
+</html>
