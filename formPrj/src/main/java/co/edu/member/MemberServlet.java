@@ -1,4 +1,4 @@
-package co.edu.mmm;
+package co.edu.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
