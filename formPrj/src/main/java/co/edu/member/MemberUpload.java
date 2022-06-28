@@ -70,7 +70,7 @@ public class MemberUpload extends HttpServlet {
 		out.print(gson.toJson(vo));
 		
 		}else {
-			
+//			cmd=delete&delId=${delId}
 			String cmd = request.getParameter("cmd");
 			String id = request.getParameter("delId"); // 문자타입임
 			PrintWriter out = response.getWriter();

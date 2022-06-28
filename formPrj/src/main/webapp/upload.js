@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() { // document object가
 
 		let formData = new FormData(e.target); // e.target = form
 		
-		
 		for (let ent of formData.entries()) { // form안에 key와 value값을 배열형식으로 다 가져옴
 			console.log(ent);
 		};
@@ -100,9 +99,9 @@ function makeTr(member) { // 호출할때 실행되니깐 어디있어도 상관
 
 function rowDelete() {
 	let delId = this.parentElement.parentElement.getAttribute('id'); 
-	let formData = new FormData();
-	formData.append("cmd", "delete");
-	formData.append("delId", delId);
+//	let formData = new FormData();
+//	formData.append("cmd", "delete");
+//	formData.append("delId", delId);
 
 
 	fetch('memberUpload', {
