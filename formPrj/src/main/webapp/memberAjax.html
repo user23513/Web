@@ -87,7 +87,7 @@ form>label {
     		xhtp.open('post', 'member'); // 요청방식 post : 매개값이 몸체에 담겨 넣어감.
     		xhtp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     		xhtp.send(`cmd=add&name=${mNm}&addr=${mAr}&phone=${mPh}&birth=${mBi}`);
-    		xhtp.onload = function(){
+    		xhtp.onload = function(){ // 받아온 결과를 가지고 화면에 그려주겠습니다.
     			let result = JSON.parse(this.responseText); // 여기서 this는 xhtp
     			console.log(result);
     			document.querySelector('#show tbody').append(makeTr(result));
@@ -95,8 +95,8 @@ form>label {
     		
     	})
     	
-    	let fields = ['membNo','membName','membPhone','membAddr','membBirth', 'membImage'];
     	
+    	let fields = ['membNo','membName','membPhone','membAddr','membBirth', 'membImage'];
     	// 회원정보 => tr 생성.
     	function makeTr(member) {
     		let tr = document.createElement('tr');

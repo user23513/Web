@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>promise.html</title>
+</head>
+
+<body>
+    <div id="show">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>회원번호</th>
+                    <th>회원이름</th>
+                    <th>연락처</th>
+                    <th>주소</th>
+                    <th>생년월일</th>
+                    <th>사진</th>
+                    <th>삭제</th>
+                    <th>체크</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        // promise => fetch : pending, fullfilled, rejected (p241), then(), catch()
+        // promise는 fetch를 사용하기 위해?
+
+        // 비동기방식으로 실행
+        let promise = new Promise(function (resolve, reject) { // resolve:성공했을때 콜백함수, reject:실패했을때 콜백함수
+            setTimeout(function () {
+                resolve('success'); // 성공처리 실행할 콜백함수.
+            }, 1000);
+        });
+
+        promise
+            .then(function (result) { // result값이 'success'
+                console.log(result);
+            })
+            .catch(function (error) {
+                console.error(error);
+            })
+
+        function asyncwork(value) {
+            return new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    value -= 20;
+                    if (value > 50) {
+                        resolve(value);
+                    } else {
+                        reject(value);
+                    }
+                }, 1000)
+            });
+        }
+
+        asyncwork(100)
+            .then(function (value) {
+                console.log(value);
+                return asyncwork(value);
+            })
+            .then(function (value) {
+                console.log(value);
+                return asyncwork(value);
+            })
+            .then(function (value) {
+                console.log(value);
+                return asyncwork(value);
+            })
+            .catch(function (error) {
+                console.log('catch ' + error);
+            })
+
+        fetch('member?cmd=list') // 넘어오는 json형태의 데이터 / 반환해주는 값이 Promise
+            .then(function (result) {
+                return result.json(); // text형식의 json을 객체로 만들어주는 json()
+            }) // 반환해주는 값이 Promise
+            .then(function (result) {
+                let tbody = document.querySelector('#show tbody');
+                result.forEach(member => {
+                    tbody.append(makeTr(member));
+                })
+            })
+            .catch(function (error) {
+                console.error(error);
+            })
+
+
+        let fields = ['membNo', 'membName', 'membPhone', 'membAddr', 'membBirth', 'membImage'];
+        // 회원정보 => tr 생성.
+        function makeTr(member) {
+            let tr = document.createElement('tr');
+            tr.setAttribute('id', member.membNo); // tr의 attribute중에 id를 활용
+            // tr.addEventListener('click', showDetail);
+
+            fields.forEach(field => {
+                let td = document.createElement('td');
+                // null, 0, undefined, '' => false 이외 true;
+                td.innerHTML = member[field] ? member[field] : (!'' ? field == 'membImage' ? 'no img' : '' :
+                    '');
+                tr.append(td);
+            })
+
+            // 삭제버튼
+            let btn = document.createElement('button');
+            btn.innerHTML = '삭제';
+            //btn.addEventListener('click', rowDelete)
+            let td = document.createElement('td');
+            td.append(btn);
+            tr.append(td);
+
+            // 체크박스. input type='checkbox'
+            td = document.createElement('td');
+            let ckBox = document.createElement('input');
+            ckBox.setAttribute('type', 'checkbox');
+            ckBox.addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+            td.append(ckBox);
+            tr.append(td);
+
+            return tr;
+        }
+    </script>
+</body>
+
+</html>
