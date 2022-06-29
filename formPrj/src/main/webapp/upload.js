@@ -99,15 +99,15 @@ function makeTr(member) { // 호출할때 실행되니깐 어디있어도 상관
 
 function rowDelete() {
 	let delId = this.parentElement.parentElement.getAttribute('id'); 
-<<<<<<< HEAD
+
 	/*let formData = new FormData();
 	formData.append("cmd", "delete");
 	formData.append("delId", delId);*/
-=======
+
 //	let formData = new FormData();
 //	formData.append("cmd", "delete");
 //	formData.append("delId", delId);
->>>>>>> branch 'master' of https://github.com/user23513/Web.git
+
 
 
 	fetch('memberUpload', {
