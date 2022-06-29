@@ -22,6 +22,7 @@ public class FullCalendarServ extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// 출력정보 한글포함
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/json;charset=utf-8");
 		
@@ -35,6 +36,48 @@ public class FullCalendarServ extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 입력정보 한글포함
+		request.setCharacterEncoding("utf-8");
+		
+		// 파라미터정보: cmd=insert, title=입력한값, start=입력값, end=입력값
+		String cmd, title,start, end;
+
+		EmpDAO dao = new EmpDAO();
+		
+		cmd = request.getParameter("cmd");
+		title = request.getParameter("title");
+		start = request.getParameter("start");
+		end = request.getParameter("end");
+		
+		if(cmd.equals("insert")) {
+			CalendarVO vo = new CalendarVO();
+			// 사용자 입력값을 vo 셋팅
+			vo.setTitle(title);
+			vo.setStartDate(start);
+			vo.setEndDate(end);
+			
+			// 정상적으로 입력처리가 되면
+			if(dao.insertSchedule(vo)) {
+				response.getWriter().print("{\"retCode\": \"Success\"}");
+			}else {
+				//response.getWriter().print("{\"retCode\": \"Fail\"}");
+			}
+			
+		}else if(cmd.equals("delete")) {
+			CalendarVO vo = new CalendarVO();
+			
+			vo.setTitle(title);
+			
+			
+			if(dao.deleteSchedule(vo)) {
+				response.getWriter().print("{\"retCode\": \"Success\"}");
+			}else {
+				response.getWriter().print("{\"retCode\": \"Fail\"}");
+			}
+			
+		}
+		
 		
 	}
 

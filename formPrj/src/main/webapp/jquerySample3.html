@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>jquerySample3.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    	// XMLHttpRequest, fetch : Ajax(비동기)
+    
+        $(document).ready(function(){
+        	// let fdata = new FormData(); // text,stream
+        	
+        	// ajax
+        	$.ajax({
+        		// 
+        		url: './member',
+        		method: 'get',
+        		contentType: 'application/x-www-form-urlencoded', // or 'multipart/form-data'
+        		data: 'cmd=list', // parameter 호출페이지로 넘겨줄 값
+        		dataType:'json', // xml or json 결과를 받아올때(parse 안해도됨)
+        		success: function(result){
+        			console.log(result);
+        			let tbody = $('table>tbody');
+        			$(result).each((idx,elem) => {
+        				// id, name, phone, agr:계산
+        				let today = new Date();
+        				let birth = new Date(elem.membBirth);
+        				//console.log(elem.membBirth.slice(0,10))
+        				let age = today.getFullYear() - birth.getFullYear();
+        				
+        				tbody.append(
+        				$('<tr>').append(
+        						$('<td>').text(elem.membNo),
+        						$('<td>').text(elem.membName),
+        						$('<td>').text(elem.membPhone),
+        						$('<td>').text(age),
+        						$('<td>').append($('<button>').text('삭제'))
+        						));
+        			});
+        		},
+        		error: function(err){
+        			console.log(err);
+        		}
+        	});
+        	
+        }); 
+    </script>
+</head>
+
+<body>
+    <div id="show">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>회원아이디</th>
+                    <th>회원이름</th>
+                    <th>회원연락처</th>
+                    <th>회원나이</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

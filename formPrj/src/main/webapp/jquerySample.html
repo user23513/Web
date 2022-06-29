@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>jquerySample.html</title>
+	<script src="./jquery/jquery-3.6.0.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			// 자바스크립트 기능 구현 jquery제공하는 api 이용해서 기능구현
+			let div = document.getElementById('show');
+
+			let ul = document.createElement('ul'); // DOM
+			let ary = ['JApple', 'JBanana'];
+			ary.forEach(val => {
+				let li = document.createElement('li');
+				li.innerHTML = val;
+				ul.append(li);
+			});
+
+			div.append(ul);
+
+
+			// jquery 방식 $('선택자 or <생성>')
+			let ulTag = $('<ul>').append($('<li>').html('QApple') // <li>Apple</li>
+				           , $('<li>').html('QBanana'));
+
+			$('#show').append(ulTag);
+			$('#show ul:nth-child(3)').remove();
+
+
+
+		})
+	</script>
+</head>
+
+<body>
+	<div id="show">
+		<ul>
+			<li>Apple</li>
+			<li>Banana</li>
+		</ul>
+	</div>
+</body>
+
+</html>

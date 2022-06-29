@@ -100,9 +100,9 @@ function makeTr(member) { // 호출할때 실행되니깐 어디있어도 상관
 
 function rowDelete() {
 	let delId = this.parentElement.parentElement.getAttribute('id'); 
-	let formData = new FormData();
+	/*let formData = new FormData();
 	formData.append("cmd", "delete");
-	formData.append("delId", delId);
+	formData.append("delId", delId);*/
 
 
 	fetch('memberUpload', {

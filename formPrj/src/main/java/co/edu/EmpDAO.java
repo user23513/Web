@@ -8,6 +8,63 @@ import java.util.Map;
 
 public class EmpDAO extends DAO {
 	
+	// 입력기능
+	public boolean insertSchedule(CalendarVO vo) {
+		// 정상적으로 한건 입력이 되면 -> true.
+		// 예외, 0건 -> false.
+		getConnect();
+		String sql = "insert into full_calendar \r\n"
+				+ "VALUES (?,?,?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, vo.getTitle());
+			psmt.setString(2, vo.getStartDate());
+			psmt.setString(3, vo.getEndDate());
+			int r = psmt.executeUpdate(); // r건입력
+			
+			if(r>0) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			disConnect();
+		}
+		
+		return false;
+		
+	}
+	
+	// 삭제기능
+	public boolean deleteSchedule(CalendarVO vo) {
+		getConnect();
+		String sql = "DELETE FROM full_calendar\r\n"
+				+ "WHERE title=?\r\n";
+		
+		try {
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, vo.getTitle());
+			//psmt.setString(2, vo.getStartDate());
+			//psmt.setString(3, vo.getEndDate());
+			
+			int r = psmt.executeUpdate(); // r건 삭제
+			
+			if(r>0) {
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}finally {
+			disConnect();
+		}
+		
+		return false;
+	}
+	
 	// 일정정보
 	public List<CalendarVO> getSchedule() {
 		// 전체 일정정보를 가지고 오도록 메소드 완성하세요.
