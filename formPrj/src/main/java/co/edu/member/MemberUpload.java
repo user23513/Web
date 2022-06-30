@@ -31,7 +31,7 @@ public class MemberUpload extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/json;charset=utf-8");
+		response.setContentType("text/json;charset=utf-8"); // 만들어진 결과가 json형식으로 파싱되어서 보내진다.
 		
 		boolean isMulti = ServletFileUpload.isMultipartContent(request); // 요청정보가 멀티파트요청인지 아닌지 체크해주는 메소드
 		
@@ -67,7 +67,7 @@ public class MemberUpload extends HttpServlet {
 		
 		//{"retCode": "Fullfilled"}
 		//out.print("{\"retCode\": \"Fullfilled\"}");
-		out.print(gson.toJson(vo));
+		out.print(gson.toJson(vo)); 
 		
 		}else {
 //			cmd=delete&delId=${delId}
