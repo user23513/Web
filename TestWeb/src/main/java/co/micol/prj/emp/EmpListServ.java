@@ -20,20 +20,21 @@ public class EmpListServ extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EmpDAO dao = new EmpDAO();
-		List<EmpVO> list = new ArrayList<EmpVO>();
 		
 		String id = request.getParameter("departmentId");
-		if(id != null && ! id.isEmpty()) {
-			request.setAttribute("select", list.add(dao.selectOne(id)));
-		}else {
 			request.setAttribute("list", dao.selectAll(id));
-		}
+		
 		request.getRequestDispatcher("WEB-INF/jsp/emp/empList.jsp").forward(request, response);
 		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String deptId = request.getParameter("departmentId");
+		EmpDAO dao = new EmpDAO();
+		request.setAttribute("list", dao.searchList(deptId));
+		
+		request.getRequestDispatcher("WEB-INF/jsp/emp/empList.jsp").forward(request, response);
+		
 	}
 
 }

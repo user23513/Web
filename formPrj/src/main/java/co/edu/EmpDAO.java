@@ -46,8 +46,6 @@ public class EmpDAO extends DAO {
 		try {
 			psmt=conn.prepareStatement(sql);
 			psmt.setString(1, vo.getTitle());
-			//psmt.setString(2, vo.getStartDate());
-			//psmt.setString(3, vo.getEndDate());
 			
 			int r = psmt.executeUpdate(); // r건 삭제
 			

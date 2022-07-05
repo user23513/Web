@@ -41,6 +41,7 @@ public class EmpInsertServ extends HttpServlet {
 		String email = request.getParameter("email");
 		String hireDate = request.getParameter("hireDate");
 		String jobId = request.getParameter("jobID");
+		String deptId = request.getParameter("departmentId");
 		
 		
 		EmpVO vo = new EmpVO();
@@ -53,10 +54,10 @@ public class EmpInsertServ extends HttpServlet {
 		
 		int cnt = dao.insert(vo);
 		
-		response.getWriter().append(cnt + "건이 등록됨");
+		//response.getWriter().append(cnt + "건이 등록됨");
 		
-//		request.setAttribute("list", dao.selectAll(id));
-//		request.getRequestDispatcher("WEB-INF/jsp/emp/empList.jsp").forward(request, response);
+		request.setAttribute("list", dao.selectAll(deptId));
+		request.getRequestDispatcher("WEB-INF/jsp/emp/empList.jsp").forward(request, response);
 	}
 	
 	

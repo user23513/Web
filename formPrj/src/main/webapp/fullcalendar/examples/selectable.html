@@ -12,7 +12,7 @@
       var calendarEl = document.getElementById('calendar');
 
       // 서버에 요청
-      fetch('../../FullCalendarServ')
+      fetch('../../FullCalendarServ') // schedules가 db에 있는 모든 리스트
         .then(function (result) {
           return result.json();
         })
@@ -79,10 +79,14 @@
                     body: `cmd=delete&title=${arg.event.title}`
                   })
                   .then(result => result.json())
-                  .then(result => console.log(result))
+                  .then(result => {
+                	  console.log(result);
+                	  if(result.retCode == 'Success'){
+	                	  arg.event.remove();
+                	  }
+                  })
                   .catch(err => console.log(err))
                 
-                arg.event.remove()
               }
             },
             editable: true,

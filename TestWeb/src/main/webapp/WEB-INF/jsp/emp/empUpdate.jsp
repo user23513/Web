@@ -1,3 +1,4 @@
+<%@page import="co.micol.prj.emp.EmpVO"%>
 <%@page import="co.micol.prj.dept.DeptVO"%>
 <%@page import="java.util.List"%>
 <%@page import="co.micol.prj.emp.JobsVO"%>
@@ -49,7 +50,7 @@
 				frm.email.focus();
 				return false;
 			}
-			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*;
 			if(regExp.test(frm.email.value) == false) {
 				alert("이메일형식이 안맞습니다");
 				frm.email.focus();
@@ -71,34 +72,43 @@
 </head>
 
 <body>
+<% EmpVO vo = (EmpVO)request.getAttribute("emp"); %>
 	<div>
 		<h2 style="text-align: center;">사원수정</h2>
-		<form name="frm" action="empInsert" method="post" onsubmit="return validateForm()">
+		<form name="frm" action="empUpdate" method="post" onsubmit="return validateForm()">
 			<label for="employeeId">사원번호</label>
-			<input type="number" name="employeeId"><br>
+			<input type="number" name="employeeId" value="<%=vo.getEmployeeId()%>" readonly=><br>
 
 			<label for="lastName">이름</label>
-			<input type="text" name="lastName"><br>
+			<input type="text" name="lastName" value="<%=vo.getLastName()%>"><br>
 
 			<label for="email">이메일</label>
-			<input type="text" name="email"><br>
+			<input type="text" name="email" value="<%=vo.getEmail()%>"><br>
 
 			<label for="hireDate">입사년도</label>
-			<input type="date" name="hireDate"><br>
+			<input type="date" name="hireDate" value="<%=vo.getHireDate().substring(0,10)%>"><br>
 
 			<label for="jobID">직무</label>
+			<% 	List<JobsVO> list = (List<JobsVO>)request.getAttribute("jobs");%>
 			<select name="jobID">
-				<% 	List<JobsVO> list = (List<JobsVO>)request.getAttribute("dept");
-					for(JobsVO jobs : list) { %>
-					<option value="<%= jobs.getJobId() %>"><%= jobs.getJobTitle() %>
+				<% for(JobsVO jobs : list) { %>
+					<% if(jobs.getJobId().equals(vo.getJobID())){ %>
+						<option value="<%= jobs.getJobId() %>" selected><%= jobs.getJobTitle() %>
+					<% }else{ %>
+						<option value="<%= jobs.getJobId() %>"><%= jobs.getJobTitle() %>
+					<% } %>
 				<% } %>
 			</select><br>
 			<label for="deptId">부서명</label>
 			<% List<DeptVO> deptlist = (List<DeptVO>)request.getAttribute("depts"); 
 			   for(DeptVO dept : deptlist) { %>
-				<input type="radio" name="deptId" value="<%= dept.getDeptId() %>"><%= dept.getDeptName()%>
+			   <% if(vo.getDepartmentId()!=null && vo.getDepartmentId().equals(dept.getDeptId())) { %> 
+					<input type="radio" name="deptId" value="<%= dept.getDeptId() %>" checked><%= dept.getDeptName()%>
+				<% }else { %>
+					<input type="radio" name="deptId" value="<%= dept.getDeptId() %>"><%= dept.getDeptName()%>
+				<% } %>
 			<% } %>
-			<input type="submit" value="저장">
+			<input type="submit" value="수정">
 		</form>
 	</div>
 </body>

@@ -79,9 +79,9 @@ public class EmpDAO extends DAO {
 		EmpVO vo = new EmpVO();
 		try {
 			getConnect();
-			String sql = "select EMPLOYEE_ID, LAST_NAME, EMAIL, HIRE_DATE, JOB_ID "
+			String sql = "select EMPLOYEE_ID, LAST_NAME, EMAIL, HIRE_DATE, JOB_ID, DEPARTMENT_ID "
 					+ "from employees "
-					+ "where department_id = ? ";
+					+ "where EMPLOYEE_ID = ? ";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			rs = psmt.executeQuery();
@@ -92,6 +92,7 @@ public class EmpDAO extends DAO {
 				vo.setEmail(rs.getString(3));
 				vo.setHireDate(rs.getString(4));
 				vo.setJobID(rs.getString(5));
+				vo.setDepartmentId(rs.getString(6));
 			}
 			
 		} catch (Exception e) {
@@ -101,6 +102,38 @@ public class EmpDAO extends DAO {
 		}
 		
 		return vo;
+	}
+	
+	// 검색조회
+	public List<EmpVO> searchList(String deptId) {
+		List<EmpVO> list = new ArrayList<>();
+		try {
+			getConnect();
+			String sql = "select EMPLOYEE_ID, LAST_NAME, EMAIL, HIRE_DATE, JOB_ID, DEPARTMENT_ID "
+					+ "from employees "
+					+ "where DEPARTMENT_ID = ? ";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, deptId);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				EmpVO vo = new EmpVO();
+				vo.setEmployeeId(rs.getString(1));
+				vo.setLastName(rs.getString(2));
+				vo.setEmail(rs.getString(3));
+				vo.setHireDate(rs.getString(4));
+				vo.setJobID(rs.getString(5));
+				vo.setDepartmentId(rs.getString(6));
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConnect();
+		}
+		
+		return list;
 	}
 
 	// 등록
@@ -133,14 +166,15 @@ public class EmpDAO extends DAO {
 		try {
 			getConnect();
 			String sql = "update employees "
-					+ "set LAST_NAME=?, EMAIL=?, HIRE_DATE=?, JOB_ID=? "
+					+ "set LAST_NAME=?, EMAIL=?, HIRE_DATE=?, JOB_ID=?, DEPARTMENT_ID=? "
 					+ "where EMPLOYEE_ID=?";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getLastName());
 			psmt.setString(2, vo.getEmail());
 			psmt.setString(3, vo.getHireDate());
 			psmt.setString(4, vo.getJobID());
-			psmt.setString(5, vo.getEmployeeId());
+			psmt.setString(5, vo.getDepartmentId());
+			psmt.setString(6, vo.getEmployeeId());
 			
 			r = psmt.executeUpdate();
 			
