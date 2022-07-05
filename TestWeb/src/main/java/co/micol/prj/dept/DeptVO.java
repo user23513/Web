@@ -1,17 +1,17 @@
-package co.micol.prj;
+package co.micol.prj.dept;
 
 public class DeptVO {
-	private int deptId;
+	private String deptId;
 	private String deptName;
-	private int deptManagerId;
-	private int deptLocationId;
+	private String deptManagerId;
+	private String deptLocationId;
 	
 	
 	public DeptVO() {
 	}
 	
 	
-	public DeptVO(int deptId, String deptName, int deptManagerId, int deptLocationId) {
+	public DeptVO(String deptId, String deptName, String deptManagerId, String deptLocationId) {
 		this.deptId = deptId;
 		this.deptName = deptName;
 		this.deptManagerId = deptManagerId;
@@ -19,30 +19,47 @@ public class DeptVO {
 	}
 
 
-	public int getDeptId() {
+	public String getDeptId() {
 		return deptId;
 	}
-	public void setDeptId(int deptId) {
+
+
+	public void setDeptId(String deptId) {
 		this.deptId = deptId;
 	}
+
+
 	public String getDeptName() {
 		return deptName;
 	}
+
+
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
-	public int getDeptManagerId() {
+
+
+	public String getDeptManagerId() {
 		return deptManagerId;
 	}
-	public void setDeptManagerId(int deptManagerId) {
+
+
+	public void setDeptManagerId(String deptManagerId) {
 		this.deptManagerId = deptManagerId;
 	}
-	public int getDeptLocationId() {
+
+
+	public String getDeptLocationId() {
 		return deptLocationId;
 	}
-	public void setDeptLocationId(int deptLocationId) {
+
+
+	public void setDeptLocationId(String deptLocationId) {
 		this.deptLocationId = deptLocationId;
 	}
+
+
+	
 	
 	
 

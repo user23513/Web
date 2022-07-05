@@ -8,6 +8,7 @@
 <title>deptList.jsp</title>
 </head>
 <body>
+	<a href="DeptInsert">부서등록</a>
 	<table border="1">
 		<thead>
 			<tr>
@@ -20,10 +21,10 @@
 		<tbody>
 		<c:forEach var="vo" items="${list}">
 			<tr>
-				<td>${vo.deptId }</td>
-				<td>${vo.deptName }</td>
-				<td>${vo.deptManagerId }</td>
-				<td>${vo.deptLocationId }</td>
+				<td>${vo.deptId}</td>
+				<td><a href="DeptUpdate?deptId=${vo.deptId}">${vo.deptName}</a></td>
+				<td>${vo.deptManagerId}</td>
+				<td>${vo.deptLocationId}</td>
 			</tr>
 		</c:forEach>
 		</tbody>
