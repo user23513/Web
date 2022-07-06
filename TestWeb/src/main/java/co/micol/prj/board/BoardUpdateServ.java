@@ -26,7 +26,29 @@ public class BoardUpdateServ extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		String id = request.getParameter("id");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String writer = request.getParameter("writer");
+		String rdt = request.getParameter("rdt");
+		String hit = request.getParameter("hit");
+		
+		BoardVO vo = new BoardVO();
+		vo.setId(id);
+		vo.setTitle(title);
+		vo.setContent(content);
+		vo.setWriter(writer);
+		vo.setRdt(rdt);
+		vo.setHit(hit);
+		
+		BoardDAO dao = new BoardDAO();
+		dao.update(vo);
+		
+		response.sendRedirect("boardList");
+		
 	}
 
 }
