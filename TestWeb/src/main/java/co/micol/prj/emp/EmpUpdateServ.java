@@ -18,10 +18,12 @@ public class EmpUpdateServ extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String empId = request.getParameter("empId");
-		request.setAttribute("emp", new EmpDAO().selectOne(empId));
 		request.setAttribute("jobs", new EmpDAO().selectJobs());
 		request.setAttribute("depts", new DeptDAO().DeptListAll());
+		
+		//사번 단건조회
+		String empId = request.getParameter("empId");
+		request.setAttribute("emp", new EmpDAO().selectOne(empId));
 		
 		request.getRequestDispatcher("/WEB-INF/jsp/emp/empUpdate.jsp").forward(request, response);
 	}

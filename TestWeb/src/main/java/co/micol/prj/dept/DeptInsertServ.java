@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/DeptInsert")
+@WebServlet("/deptInsert")
 public class DeptInsertServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

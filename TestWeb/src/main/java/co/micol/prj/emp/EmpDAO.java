@@ -75,24 +75,24 @@ public class EmpDAO extends DAO {
 	}
 
 	// 단건조회
-	public EmpVO selectOne(String id) {
+	public EmpVO selectOne(String empId) {
 		EmpVO vo = new EmpVO();
 		try {
 			getConnect();
-			String sql = "select EMPLOYEE_ID, LAST_NAME, EMAIL, HIRE_DATE, JOB_ID, DEPARTMENT_ID "
+			String sql = "select * "
 					+ "from employees "
 					+ "where EMPLOYEE_ID = ? ";
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, id);
+			psmt.setString(1, empId);
 			rs = psmt.executeQuery();
 			
-			while(rs.next()) {
-				vo.setEmployeeId(rs.getString(1));
-				vo.setLastName(rs.getString(2));
-				vo.setEmail(rs.getString(3));
-				vo.setHireDate(rs.getString(4));
-				vo.setJobID(rs.getString(5));
-				vo.setDepartmentId(rs.getString(6));
+			if(rs.next()) {
+				vo.setEmployeeId(rs.getString("EMPLOYEE_ID"));
+				vo.setLastName(rs.getString("LAST_NAME"));
+				vo.setEmail(rs.getString("EMAIL"));
+				vo.setHireDate(rs.getString("HIRE_DATE"));
+				vo.setJobID(rs.getString("JOB_ID"));
+				vo.setDepartmentId(rs.getString("DEPARTMENT_ID"));
 			}
 			
 		} catch (Exception e) {
@@ -141,14 +141,14 @@ public class EmpDAO extends DAO {
 		int cnt = 0;
 		try {
 			getConnect();
-			String sql = "insert into employees (EMPLOYEE_ID, LAST_NAME, EMAIL, HIRE_DATE, JOB_ID) "
-					+ "values (?,?,?,?,?)";
+			String sql = "insert into employees (EMPLOYEE_ID, LAST_NAME, EMAIL, HIRE_DATE, JOB_ID, DEPARTMENT_ID) "
+					+ "values ((select max(EMPLOYEE_ID)+1 from employees),?,?,?,?,?)";
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, vo.getEmployeeId());
-			psmt.setString(2, vo.getLastName());
-			psmt.setString(3, vo.getEmail());
-			psmt.setString(4, vo.getHireDate());
-			psmt.setString(5, vo.getJobID());
+			psmt.setString(1, vo.getLastName());
+			psmt.setString(2, vo.getEmail());
+			psmt.setString(3, vo.getHireDate());
+			psmt.setString(4, vo.getJobID());
+			psmt.setString(5, vo.getDepartmentId());
 			
 			cnt = psmt.executeUpdate();
 
@@ -188,5 +188,21 @@ public class EmpDAO extends DAO {
 	}
 
 	// 삭제
-
+	public int empDelete(String empId) {
+		int r = 0;
+		try {
+			getConnect();
+			String sql = "delete from employees "
+					+ "where employee_id=?";
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, empId);
+			r = psmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConnect();
+		}
+		
+		return r;
+	}
 }

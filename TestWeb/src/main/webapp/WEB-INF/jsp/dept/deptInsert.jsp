@@ -17,6 +17,7 @@
 </script>
 </head>
 <body>
+<jsp:include page="/WEB-INF/jsp/header.jsp" />
 	<form name="frm" action="DeptInsert" method="post">
 		부서번호<input type="number" name="deptId"><br>
 		부서명<input type="text" name="deptName"><br>

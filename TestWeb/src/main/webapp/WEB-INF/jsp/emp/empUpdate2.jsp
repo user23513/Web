@@ -4,7 +4,6 @@
 <%@page import="co.micol.prj.emp.JobsVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -98,15 +97,12 @@
 				<% } %>
 <%-- 				<% if(jobs.getJobId().equals(vo.getJobID())){ %>selected<% } %> --%>
 			</select><br>
-			
 			<label for="deptId">부서명</label>
-			<c:forEach var="dept" items="${depts}">
-					<input type="radio" name="deptId" value="${dept.deptId}"> ${dept.deptName}
-			</c:forEach>
-				
-<%-- 			    <c:if test="dept.getDeptId() == vo.getDepartmentId()">checked</c:if> --%>
+			<% List<DeptVO> deptlist = (List<DeptVO>)request.getAttribute("depts"); 
+			   for(DeptVO dept : deptlist) { %>
+					<input type="radio" name="deptId" value="<%= dept.getDeptId() %>"> <%= dept.getDeptName()%>
+				<% } %>
 <%-- 				<%if(vo.getDepartmentId()!=null && vo.getDepartmentId().equals(dept.getDeptId())) {  %>checked<%} %> --%>
-
 			<br><input type="submit" value="수정">
 			<button type="button" onclick="empDelete()">삭제</button>
 		</form>

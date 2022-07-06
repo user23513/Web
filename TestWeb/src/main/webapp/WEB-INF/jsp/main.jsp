@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/jsp/header.jsp" />
 메인입니다.
 
 </body>

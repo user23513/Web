@@ -10,6 +10,7 @@
 <title>jstl</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/jsp/header.jsp" />
 <h3>사원목록</h3>
 <a href="empInsert">사원등록</a><br>
 
@@ -31,8 +32,8 @@
 		<tbody>
 			<c:forEach var="vo" items="${list}">
 				<tr>
-					<td><a href="empUpdate?empId=${vo.employeeId}">${vo.employeeId}</a></td>
-					<td>${vo.lastName}</td>
+					<td>${vo.employeeId}</td>
+					<td><a href="empUpdate?empId=${vo.employeeId}">${vo.lastName}</a></td>
 					<td>${vo.email}</td>
 					<td>${vo.hireDate}</td>
 					<td>${vo.jobID}</td>

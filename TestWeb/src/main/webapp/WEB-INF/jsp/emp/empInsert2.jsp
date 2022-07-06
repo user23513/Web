@@ -3,7 +3,6 @@
 <%@page import="co.micol.prj.emp.JobsVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -95,17 +94,16 @@
 
 			<label for="jobID">직무</label>
 			<select name="jobID">
-				<c:forEach var="job" items="${jobs }">
-					<option value="${job.getJobId()}">${job.getJobTitle()}
-				</c:forEach>
+				<% 	List<JobsVO> list = (List<JobsVO>)request.getAttribute("jobs");
+					for(JobsVO jobs : list) { %>
+					<option value="<%= jobs.getJobId() %>"><%= jobs.getJobTitle() %>
+				<% } %>
 			</select><br>
-			
 			<label for="deptId">부서명</label>
 			<% List<DeptVO> deptlist = (List<DeptVO>)request.getAttribute("depts"); 
 			   for(DeptVO dept : deptlist) { %>
 				<input type="radio" name="deptId" value="<%= dept.getDeptId() %>"><%= dept.getDeptName()%>
 			<% } %>
-			
 			<input type="submit" value="저장">
 		</form>
 	</div>

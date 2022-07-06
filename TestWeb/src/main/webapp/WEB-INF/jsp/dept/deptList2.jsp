@@ -1,3 +1,5 @@
+<%@page import="co.micol.prj.dept.DeptVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -20,14 +22,13 @@
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach var="vo" items="${list}">
+		<% List<DeptVO> list = (List<DeptVO>) request.getAttribute("list");
+			for(DeptVO dept : list) {
+		%>
 			<tr>
-				<td>${vo.deptId}</td>
-				<td><a href="DeptUpdate?deptId=${vo.deptId}">${vo.deptName}</a></td>
-				<td>${vo.deptManagerId}</td>
-				<td>${vo.deptLocationId}</td>
+				<td><%=dept.getDeptId() %></td>
 			</tr>
-		</c:forEach>
+		<% } %>
 		</tbody>
 	</table>
 </body>

@@ -12,6 +12,7 @@ import org.apache.catalina.connector.Response;
 
 import co.micol.prj.dept.DeptDAO;
 
+//http://lacalhost/contextPath/empInsert
 @WebServlet("/empInsert")
 public class EmpInsertServ extends HttpServlet {
 
@@ -41,7 +42,7 @@ public class EmpInsertServ extends HttpServlet {
 		String email = request.getParameter("email");
 		String hireDate = request.getParameter("hireDate");
 		String jobId = request.getParameter("jobID");
-		String deptId = request.getParameter("departmentId");
+		String deptId = request.getParameter("deptId");
 		
 		
 		EmpVO vo = new EmpVO();
@@ -51,13 +52,19 @@ public class EmpInsertServ extends HttpServlet {
 		vo.setEmail(email);
 		vo.setHireDate(hireDate);
 		vo.setJobID(jobId);
+		vo.setDepartmentId(deptId);
 		
 		int cnt = dao.insert(vo);
 		
-		//response.getWriter().append(cnt + "건이 등록됨");
 		
-		request.setAttribute("list", dao.selectAll(deptId));
-		request.getRequestDispatcher("WEB-INF/jsp/emp/empList.jsp").forward(request, response);
+		//결과출력
+//		response.getWriter().append(cnt + "건이 등록됨");
+//		request.getRequestDispatcher("empList").forward(request, response); -> 등록버튼 눌렀을 때 empInsert로 가고/ forward(전달) 최종페이지결과만 넘어간다.(결과를 가지고 jsp(뷰페이지)로 넘어갈때 사용)
+		response.sendRedirect("empList");								  //-> 등록버튼 눌렀을 때 empList로 가고 / 브라우저가 다시 재요청(하나의처리 끝나고 다른페이지로 넘어갈때 사용)
+		
+		
+//		request.setAttribute("list", dao.selectAll(deptId));
+//		request.getRequestDispatcher("WEB-INF/jsp/emp/empList.jsp").forward(request, response);
 	}
 	
 	
