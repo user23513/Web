@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- 나는 xml파일이다 -->
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd"> <!-- dtd가 여기에 있다. 이것에 의해서 tiles-definitions와 같은 속성을 사용할수있다. -->
+
+<tiles-definitions>
+	<definition name="myapp.homepage" template="/WEB-INF/views/layouts/layout.jsp"> <!-- 이것을 템플릿으로 쓸거다. -->
+		<put-attribute name="title" value="My homepage" /> <!-- 브라우저 위에 창 -->
+		<put-attribute name="header" value="/WEB-INF/views/layouts/header.jsp" />
+<!-- 		<put-attribute name="menu" value="/tiles/common_menu.jsp" /> -->
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/layouts/footer.jsp" />
+	</definition>
+	
+	<definition name="WILDCARD:*/*" extends="myapp.homepage"> <!-- 템플릿에 태우려면main/main이런식을 들어와야한다. // main/main이런식으로 들어오면 (WILDCARD는 키워드) -->
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" /> <!-- {1}:첫번째* {2}:두번째* -->
+	</definition>
+</tiles-definitions>

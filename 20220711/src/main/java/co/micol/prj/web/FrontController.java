@@ -1,6 +1,7 @@
-package co.micol.prj.comm;
+package co.micol.prj.web;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.micol.prj.MainCommand;
+import co.micol.prj.comm.Command;
 import co.micol.prj.member.AjaxMemberIdCheck;
 import co.micol.prj.member.MemberJoin;
 import co.micol.prj.member.MemberJoinForm;
@@ -20,17 +22,18 @@ import co.micol.prj.member.MemberLogout;
 import co.micol.prj.member.command.MemberLogin;
 import co.micol.prj.member.command.memberLoginForm;
 
-@WebServlet("*.do") //모든 .do요청은 내가 처리한다.
+@WebServlet("*.do")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private HashMap<String, Command> map = new HashMap<>(); //요청과 실행문을 매핑하기 위해   
+	private HashMap<String, Command> map = new HashMap<>();
+	
     public FrontController() {
         super();
     }
 
 	public void init(ServletConfig config) throws ServletException {
-		//초기화하는 메서드(Mapping 하는 부분을 작성한다.)
-		map.put("/main.do", new MainCommand()); //처음 접속하는 페이지
+		//요청과 수행할 command연결
+		map.put("/main.do", new MainCommand()); //처음 접근하는 곳
 		map.put("/memberLoginForm.do", new memberLoginForm()); //로그인 폼 호출
 		map.put("/memberLogin.do", new MemberLogin()); //로그인처리
 		map.put("/memberLogout.do", new MemberLogout()); //로그아웃)
@@ -38,34 +41,35 @@ public class FrontController extends HttpServlet {
 		map.put("/memberJoinForm.do", new MemberJoinForm()); //회원가입 화면
 		map.put("/ajaxMemberIdCheck.do", new AjaxMemberIdCheck()); //ajax를 이용한 아이디중복체크
 		map.put("/memberJoin.do", new MemberJoin()); //회원가입 처리
-		
 	}
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
-		//실행하는 메서드(서비스 해주는 것)
-		request.setCharacterEncoding("UTF-8"); //한글 깨짐 방지
-		String uri = request.getRequestURI(); //요청된 URI를 확인한다.
-		String contextPath = request.getContextPath(); //요청 URL로 부터 contextPath를 확인한다.
-		String page = uri.substring(contextPath.length()); //실제 요청 페이지를 찾는다.
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//요청분석하고 실행하고 결과를 돌려주는 곳
 		
-		Command command = map.get(page); //실제 수행할 Command를 찾음. new MainCommand();
-		String viewPage = command.exec(request, response); //요청 Command를 수행하고 결과를 받음.
+		//요청분석
+		request.setCharacterEncoding("UTF-8");
+		String uri = request.getRequestURI();
+		String contextPath = request.getContextPath();
+		String page = uri.substring(contextPath.length());
 		
-		// viewResolve(보여줄 페이지, 돌려줄 페이지를 선택)
-		if(!viewPage.endsWith(".do") && !viewPage.equals(null)) {
-			  //ajax로 들어오는 것 처리
-			if(viewPage.startsWith("ajax:")) { // ajax를 처리하는 viewResolve
+		//요청수행
+		Command command = map.get(page);
+		String viewPage = command.exec(request, response);
+		
+		//결과페이지돌려주는 viewResolve
+		if(!viewPage.endsWith(".do")) {
+			if(viewPage.startsWith("ajax:")) {
 				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().append(viewPage.substring(5));
 				return;
 			}
-//			viewPage = "WEB-INF/views/" + viewPage + ".jsp"; //시스템에서 접근 가능한 폴더를 더해주고
-			viewPage = viewPage + ".tiles"; //tiles를 이용한 composition view pattern 사용시
+			viewPage = viewPage + ".tiles";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 			dispatcher.forward(request, response);
-		}else {
-			response.sendRedirect(viewPage); //.do로 권한 위임 처리
+		} else {
+			response.sendRedirect(viewPage);
 		}
+		
 	}
 
 }
